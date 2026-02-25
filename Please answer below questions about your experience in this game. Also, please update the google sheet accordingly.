@@ -451,7 +451,6 @@
       <!-- NEW: subjective ratings block -->
       <div id="ratings-block">
         <p style="margin-bottom:8px;">
-          Please answer below questions about your experience in this game. Also, please update the google sheet accordingly.
         </p>
 
         <div class="rating-item">
@@ -1347,8 +1346,8 @@ if (CONDITION.FOMO) {
               "Thank you for playing the game.";
           }
         } else {
-          endMsgEl.textContent =
-            "This part of the task is complete. The next task will begin shortly.";
+          endMsgEl.textContent 
+            "Please answer below questions about your experience in this game. Also, please update the google sheet accordingly.";
         }
       }
 
@@ -1418,6 +1417,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
