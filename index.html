@@ -363,21 +363,23 @@
 <body>
   <div id="game-root">
     <!-- Condition selection -->
-    <div id="screen-condselect" class="screen active">
-      <h2>Virtual Horse Race</h2>
-      <p>
-        This is a short virtual horse race with four horses.
-      </p>
-      <p style="font-size:13px;opacity:0.8;">
-         Select one of the  below conditions:
-      </p>
-      <div class="cond-grid">
-        <button class="secondary" data-cond="fomo_exc">FoMO + Non-boring</button>
-        <button class="secondary" data-cond="fomo_bor">FoMO + Boring</button>
-        <button class="secondary" data-cond="nofomo_bor">Non-FoMO + Boring</button>
-        <button class="secondary" data-cond="nofomo_exc">Non-FoMO + Non-boring</button>
-      </div>
-    </div>
+<div id="screen-condselect" class="screen active">
+  <h2>Virtual Horse Race</h2>
+  <p>
+    This is a short virtual horse race with four horses.
+  </p>
+  <!-- (PID line removed) -->
+  <p style="font-size:13px;opacity:0.8;">
+    Please select on of the below conditions.
+  </p>
+  <div class="cond-grid">
+    <button class="secondary" data-cond="fomo_exc">FoMO + Non-boring</button>
+    <button class="secondary" data-cond="fomo_bor">FoMO + Boring</button>
+    <button class="secondary" data-cond="nofomo_bor">Non-FoMO + Boring</button>
+    <button class="secondary" data-cond="nofomo_exc">Non-FoMO + Non-boring</button>
+  </div>
+</div>
+
 
     <!-- Instructions -->
    <div id="screen-intro" class="screen">
@@ -1418,6 +1420,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
