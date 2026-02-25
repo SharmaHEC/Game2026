@@ -733,11 +733,6 @@ function updateBonusBanner() {
      * CONDITION SELECTION *
      ***********************/
   function setupConditionSelection() {
-  var pidLine = el("pid-line");
-  pidLine.textContent = CONDITION.participantId
-    ? ("Participant ID: " + CONDITION.participantId)
-    : "Participant ID: (none provided in URL)";
-
   var btns = screens.condselect.querySelectorAll("button[data-cond]");
   btns.forEach(function(btn) {
     btn.addEventListener("click", function() {
@@ -755,20 +750,19 @@ function updateBonusBanner() {
         CONDITION.FOMO = false;
         CONDITION.EXCITING = true;
       }
+
       logEvent("condition_selected", { FOMO: CONDITION.FOMO, EXCITING: CONDITION.EXCITING });
 
       var bonusInstr = el("bonus-instructions");
       if (bonusInstr) {
         if (CONDITION.FOMO || CONDITION.EXCITING) {
           bonusInstr.textContent =
-            "In addition, if you win this race, you would qualify to take part " +
-            "in a lottery in which the winner receives an iPad."
+            "In addition, if you win this race, you might qualify to take part in a lottery in which the winner receives an iPad.";
         } else {
           bonusInstr.textContent = "";
         }
       }
 
-      // show/hide cheer instructions (existing code)
       var cheerInstr = el("cheer-instructions");
       if (cheerInstr) {
         cheerInstr.style.display = CONDITION.EXCITING ? "block" : "none";
@@ -778,6 +772,7 @@ function updateBonusBanner() {
     });
   });
 }
+
 
 
     /***********************
@@ -1419,6 +1414,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
