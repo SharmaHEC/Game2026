@@ -385,7 +385,7 @@
    <div id="screen-intro" class="screen">
   <h2>Virtual Horse Race</h2>
   <p>
-    In this task, you will take part in a virtual horse race with four horses.
+    In this game, you will take part in a virtual horse race with four horses.
     Your role is to select one horse and then watch the race unfold.
   </p>
   <p><strong>Please follow these steps:</strong></p>
@@ -410,7 +410,7 @@
     <!-- Choose horse -->
     <div id="screen-choose" class="screen">
       <h3>Choose your horse</h3>
-      <p>Click one horse to select it, then confirm.</p>
+      <p>Click on a horse to select it, then click on confirm to start the race.</p>
       <div id="horse-choices"></div>
       <button id="btn-choose-confirm" class="primary" disabled>Confirm choice</button>
     </div>
@@ -455,7 +455,7 @@
         </p>
 
         <div class="rating-item">
-          <div>How boring did you find this task overall? 1 (Not at all) to 7 Extremely </div>
+          <div>How boring did you find this task overall? 1 (Not at all) to 7 (Extremely) </div>
           <div class="rating-scale" id="rating-boredom">
             <!-- 1–7 radio buttons -->
             <label><input type="radio" name="boredom" value="1"> 1 </label>
@@ -469,7 +469,7 @@
         </div>
 
         <div class="rating-item">
-          <div>To what extent did you feel that you missed out something? 1 (Not at all) to 7 Extremely  </div>
+          <div>To what extent did you feel that you missed out something? 1 (Not at all) to 7 (Extremely)  </div>
           <div class="rating-scale" id="rating-fomo">
             <label><input type="radio" name="fomo_rating" value="1"> 1 </label>
             <label><input type="radio" name="fomo_rating" value="2"> 2</label>
@@ -1249,45 +1249,55 @@ if (CONDITION.FOMO) {
     }
 
     function triggerFomoInterrupt() {
-      if (raceEnded) return;
+  if (raceEnded) return;
 
-      var bbtn = el("boost-btn");
-      if (bbtn) bbtn.disabled = true;
+  var bbtn = el("boost-btn");
+  if (bbtn) {
+    bbtn.disabled = true;
+    bbtn.style.display = "none";        // NEW: hide cheer button
+  }
 
-      var chosen = horses.find(function(h) { return h.id === horseChosen; });
-      if (chosen) {
-        var others = horses.filter(function(h) { return h.id !== horseChosen; });
-        if (others.length > 0) {
-          others.sort(function(a, b) { return b.pos - a.pos; });
-          var topOther = others[0];
-          chosen.pos = Math.max(chosen.pos, topOther.pos + 1.0);
-          chosen.pos = Math.min(96, chosen.pos);
-          chosen.el.style.left = chosen.pos + "%";
-        }
-      }
+  // NEW: hide cheer panel and status feed (leader updates)
+  var cheerPanel = el("cheer-panel");
+  if (cheerPanel) cheerPanel.style.display = "none";
 
-      var overlay = el("fomo-overlay");
-      if (!overlay) return;
-      overlay.textContent =
-  "We now need you for the next part of the study.\n\n" +
-  "The other players will continue racing to the finish, and any lottery\n" +
-  "entries will be based on the final result.\n\n" +
-  "You will not see which horse wins, but the outcome will still count.";
-      overlay.classList.remove("hidden");
-
-      logEvent("fomo_interrupt");
-
-      if (raceInterval) {
-        clearInterval(raceInterval);
-        raceInterval = null;
-      }
-
-      stopAllAudio();
-
-      setTimeout(function() {
-        if (!raceEnded) endRace("fomo_interrupt");
-      }, 20000);
+  var feed = el("status-feed");
+  if (feed) feed.style.display = "none";
+  
+  var chosen = horses.find(function(h) { return h.id === horseChosen; });
+  if (chosen) {
+    var others = horses.filter(function(h) { return h.id !== horseChosen; });
+    if (others.length > 0) {
+      others.sort(function(a, b) { return b.pos - a.pos; });
+      var topOther = others[0];
+      chosen.pos = Math.max(chosen.pos, topOther.pos + 1.0);
+      chosen.pos = Math.min(96, chosen.pos);
+      chosen.el.style.left = chosen.pos + "%";
     }
+  }
+
+  var overlay = el("fomo-overlay");
+  if (!overlay) return;
+  overlay.textContent =
+    "We now need you for the next part of the study.\n\n" +
+    "The other players will continue racing to the finish, and any lottery\n" +
+    "entries will be based on the final result.\n\n" +
+    "You will not see which horse wins, but the outcome will still count.";
+  overlay.classList.remove("hidden");
+
+  logEvent("fomo_interrupt");
+
+  if (raceInterval) {
+    clearInterval(raceInterval);
+    raceInterval = null;
+  }
+
+  stopAllAudio();
+
+  setTimeout(function() {
+    if (!raceEnded) endRace("fomo_interrupt");
+  }, 20000);
+}
 
     function computeWinnerId() {
       if (!horses || horses.length === 0) return null;
@@ -1334,7 +1344,7 @@ if (CONDITION.FOMO) {
           } else {
             // Boring: do not highlight outcome; keep neutral
             endMsgEl.textContent =
-              "This part of the task is complete. The next task will begin shortly.";
+              "Thank you for playing the game.";
           }
         } else {
           endMsgEl.textContent =
@@ -1408,6 +1418,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
