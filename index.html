@@ -732,7 +732,10 @@ function updateBonusBanner() {
     /***********************
      * CONDITION SELECTION *
      ***********************/
-  function setupConditionSelection() {
+ /***********************
+ * CONDITION SELECTION *
+ ***********************/
+function setupConditionSelection() {
   var btns = screens.condselect.querySelectorAll("button[data-cond]");
   btns.forEach(function(btn) {
     btn.addEventListener("click", function() {
@@ -751,7 +754,10 @@ function updateBonusBanner() {
         CONDITION.EXCITING = true;
       }
 
-      logEvent("condition_selected", { FOMO: CONDITION.FOMO, EXCITING: CONDITION.EXCITING });
+      logEvent("condition_selected", {
+        FOMO: CONDITION.FOMO,
+        EXCITING: CONDITION.EXCITING
+      });
 
       var bonusInstr = el("bonus-instructions");
       if (bonusInstr) {
@@ -1414,6 +1420,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
