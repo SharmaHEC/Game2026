@@ -409,10 +409,7 @@
     </div>
 
     <!-- Race screen -->
-    <div id="screen-race" class="screen">
-      <div id="bonus-banner">Bonus for the winner!!</div>
-      <h3>Race in progress</h3>
-
+  <div id="bonus-banner"></div>
   	
 
       <div id="race-container" style="position:relative;">
@@ -501,20 +498,24 @@
       EXCITING: null  // EXCITING = Non-boring, so Boredom = !EXCITING
     };
 
-    function conditionHasBonus() {
-      // Keep your original mapping; adjust as needed.
-      return !(CONDITION.FOMO === false && CONDITION.EXCITING === true);
-    }
+function conditionHasLottery() {
+  // Lottery in all three conditions except Non-FoMO + Boring
+  return !(CONDITION.FOMO === false && CONDITION.EXCITING === false);
+}
+
 function updateBonusBanner() {
   var banner = document.getElementById("bonus-banner");
   if (!banner) return;
 
-  if (CONDITION.EXCITING) {
-    banner.style.display = "block";  // show in both non-boring conditions
+  if (conditionHasLottery()) {
+    banner.style.display = "block";
+    banner.textContent =
+      "You may be eligible for an iPad lottery in this race.";
   } else {
-    banner.style.display = "none";   // hide in both boring conditions
+    banner.style.display = "none";
   }
 }
+
 
     /***********************
      * SIMPLE LOGGER       *
@@ -1268,10 +1269,10 @@ if (CONDITION.FOMO) {
       var overlay = el("fomo-overlay");
       if (!overlay) return;
       overlay.textContent =
-        "We now need you for the next part of the study.\n\n" +
-        "The other players will continue racing to the finish, and the bonus\n" +
-        "will be awarded based on the final result.\n\n" +
-        "You will not see which horse wins, but the outcome will still count.";
+  "We now need you for the next part of the study.\n\n" +
+  "The other players will continue racing to the finish, and any lottery\n" +
+  "entries will be based on the final result.\n\n" +
+  "You will not see which horse wins, but the outcome will still count.";
       overlay.classList.remove("hidden");
 
       logEvent("fomo_interrupt");
@@ -1360,7 +1361,7 @@ if (CONDITION.FOMO) {
         FOMO: CONDITION.FOMO,
         EXCITING: CONDITION.EXCITING,
         horseChosen: horseChosen,
-        hasBonus: conditionHasBonus(),
+        hasBonus: conditionHasLottery(),
         boredomRating: boredomRating,
         fomoRating: fomoRating
       });
@@ -1370,7 +1371,7 @@ if (CONDITION.FOMO) {
         FOMO: CONDITION.FOMO,
         EXCITING: CONDITION.EXCITING,
         horseChosen: horseChosen,
-        hasBonus: conditionHasBonus(),
+        hasBonus: conditionHasLottery(),
         boredomRating: boredomRating,
         fomoRating: fomoRating,
         events: logEvents
@@ -1387,7 +1388,7 @@ if (CONDITION.FOMO) {
           window.qualtricsSetData("game_log_json", JSON.stringify(payload));
           window.qualtricsSetData("fomo", CONDITION.FOMO ? 1 : 0);
           window.qualtricsSetData("boredom", CONDITION.EXCITING ? 0 : 1);
-          window.qualtricsSetData("hasBonus", conditionHasBonus() ? 1 : 0);
+          window.qualtricsSetData("hasBonus", conditionHasLottery() ? 1 : 0);
           window.qualtricsSetData("horseChosen", horseChosen || "");
           window.qualtricsSetData("boredomRating", boredomRating || "");
           window.qualtricsSetData("fomoRating", fomoRating || "");
@@ -1413,6 +1414,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
