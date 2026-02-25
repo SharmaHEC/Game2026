@@ -410,9 +410,9 @@
     <!-- Choose horse -->
     <div id="screen-choose" class="screen">
       <h3>Choose your horse</h3>
-      <p>Click on a horse to select it, then click on confirm to start the race.</p>
+      <p>Click on a horse to select it, then click on "Confirm Choice" to start the race.</p>
       <div id="horse-choices"></div>
-      <button id="btn-choose-confirm" class="primary" disabled>Confirm choice</button>
+      <button id="btn-choose-confirm" class="primary" disabled>Confirm Choice</button>
     </div>
 
     <!-- Race screen -->
@@ -431,7 +431,7 @@
 
       <div id="cheer-panel">
         <div id="stamina-line">
-          <span><strong>Cheer energy</strong></span>
+          <span><strong>Cheer Energy</strong></span>
           <span id="stamina-text">100%</span>
         </div>
         <div class="bar"><div id="stamina-fill"></div></div>
@@ -451,7 +451,7 @@
       <!-- NEW: subjective ratings block -->
       <div id="ratings-block">
         <p style="margin-bottom:8px;">
-          Please answer below questions about your experience in this game. Also, please update the google sheet accordingly.
+          
         </p>
 
         <div class="rating-item">
@@ -1348,7 +1348,8 @@ if (CONDITION.FOMO) {
           }
         } else {
           endMsgEl.textContent =
-            "This part of the task is complete. The next task will begin shortly.";
+            "Please answer below questions about your experience in this game. Also, please update the google sheet accordingly.
+";
         }
       }
 
@@ -1418,6 +1419,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
