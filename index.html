@@ -1418,7 +1418,7 @@ if (CONDITION.FOMO) {
       logEvent("visibility_change", { state: document.visibilityState });
     });
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   setupConditionSelection();
   setupIntro();
   setupHorseChoice();
@@ -1426,10 +1426,12 @@ window.addEventListener("load", function () {
 
 
 
+
     
   </script>
 </body>
 </html>
+
 
 
 
