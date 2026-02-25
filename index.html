@@ -730,7 +730,7 @@ function updateBonusBanner() {
     /***********************
      * CONDITION SELECTION *
      ***********************/
-   function setupConditionSelection() {
+  function setupConditionSelection() {
   var pidLine = el("pid-line");
   pidLine.textContent = CONDITION.participantId
     ? ("Participant ID: " + CONDITION.participantId)
@@ -754,19 +754,20 @@ function updateBonusBanner() {
         CONDITION.EXCITING = true;
       }
       logEvent("condition_selected", { FOMO: CONDITION.FOMO, EXCITING: CONDITION.EXCITING });
-var bonusInstr = el("bonus-instructions");
-if (bonusInstr) {
-  if (CONDITION.EXCITING) {
-    bonusInstr.textContent =
-      "In this race, there is a bonus for the winning horse. The banner at the top " +
-      "will remind you about the same.";
-  } else {
-    bonusInstr.textContent = "";
-  }
-}
 
+      var bonusInstr = el("bonus-instructions");
+      if (bonusInstr) {
+        if (CONDITION.FOMO || CONDITION.EXCITING) {
+          bonusInstr.textContent =
+            "In addition, you may be entered into a lottery for an iPad " +
+            "depending on the outcome of this race. Details will be provided " +
+            "at the end of the study.";
+        } else {
+          bonusInstr.textContent = "";
+        }
+      }
 
-      // NEW: show/hide cheer instructions
+      // show/hide cheer instructions (existing code)
       var cheerInstr = el("cheer-instructions");
       if (cheerInstr) {
         cheerInstr.style.display = CONDITION.EXCITING ? "block" : "none";
@@ -776,6 +777,7 @@ if (bonusInstr) {
     });
   });
 }
+
 
     /***********************
      * INITIAL UI SETUP    *
@@ -1411,4 +1413,5 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
