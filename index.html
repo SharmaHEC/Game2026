@@ -942,9 +942,9 @@ if (chosen && chosen.el) {
      ***********************/
     function startNonFomoRace() {
   if (CONDITION.EXCITING) {
-    RACE_TOTAL_MS = 180 * 1000;   // ~3 min
+    RACE_TOTAL_MS = 240 * 1000;   // ~4 min
   } else {
-    RACE_TOTAL_MS = 180 * 1000;  // ~3 min (boredom)
+    RACE_TOTAL_MS = 240 * 1000;  // ~4 min (boredom)
   }
   FOMO_INTERRUPT_MS = null;
 
@@ -979,11 +979,11 @@ if (chosen && chosen.el) {
      ***********************/
     function startFomoRace() {
   if (CONDITION.EXCITING) {
-    RACE_TOTAL_MS = 180 * 1000;
-    FOMO_INTERRUPT_MS = 150 * 1000;
+    RACE_TOTAL_MS = 240 * 1000;
+    FOMO_INTERRUPT_MS = 180 * 1000;
   } else {
-    RACE_TOTAL_MS = 180 * 1000;
-    FOMO_INTERRUPT_MS = 150 * 1000;
+    RACE_TOTAL_MS = 240 * 1000;
+    FOMO_INTERRUPT_MS = 180 * 1000;
   }
 
   showScreen("race");
@@ -1411,3 +1411,4 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
