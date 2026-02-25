@@ -445,47 +445,42 @@
     <div id="screen-end" class="screen">
       <h3>Thank you</h3>
       <p id="end-message-main">
-        This part of the task is complete. The next task will begin shortly.
+        
       </p>
 
       <!-- NEW: subjective ratings block -->
       <div id="ratings-block">
         <p style="margin-bottom:8px;">
-          Before continuing, please answer the questions below about your experience in this task.
+          Please answer below questions about your experience in this game. Also, please update the google sheet accordingly.
         </p>
 
         <div class="rating-item">
-          <div>How boring did you find this task overall?</div>
+          <div>How boring did you find this task overall? 1 (Not at all) to 7 Extremely </div>
           <div class="rating-scale" id="rating-boredom">
             <!-- 1–7 radio buttons -->
-            <label><input type="radio" name="boredom" value="1"> 1 (Not at all)</label>
+            <label><input type="radio" name="boredom" value="1"> 1 </label>
             <label><input type="radio" name="boredom" value="2"> 2</label>
             <label><input type="radio" name="boredom" value="3"> 3</label>
             <label><input type="radio" name="boredom" value="4"> 4</label>
             <label><input type="radio" name="boredom" value="5"> 5</label>
             <label><input type="radio" name="boredom" value="6"> 6</label>
-            <label><input type="radio" name="boredom" value="7"> 7 (Extremely)</label>
+            <label><input type="radio" name="boredom" value="7"> 7 </label>
           </div>
         </div>
 
         <div class="rating-item">
-          <div>To what extent did you feel that you missed out something?</div>
+          <div>To what extent did you feel that you missed out something? 1 (Not at all) to 7 Extremely  </div>
           <div class="rating-scale" id="rating-fomo">
-            <label><input type="radio" name="fomo_rating" value="1"> 1 (Not at all)</label>
+            <label><input type="radio" name="fomo_rating" value="1"> 1 </label>
             <label><input type="radio" name="fomo_rating" value="2"> 2</label>
             <label><input type="radio" name="fomo_rating" value="3"> 3</label>
             <label><input type="radio" name="fomo_rating" value="4"> 4</label>
             <label><input type="radio" name="fomo_rating" value="5"> 5</label>
             <label><input type="radio" name="fomo_rating" value="6"> 6</label>
-            <label><input type="radio" name="fomo_rating" value="7"> 7 (Extremely)</label>
+            <label><input type="radio" name="fomo_rating" value="7"> 7 </label>
           </div>
         </div>
       </div>
-
-      <p style="font-size:13px;opacity:0.7;">
-        (For debugging / piloting only) The event log is shown below.
-      </p>
-      <textarea id="log-output" readonly></textarea>
     </div>
   </div>
 
@@ -516,7 +511,7 @@ function updateBonusBanner() {
   if (conditionHasLottery()) {
     banner.style.display = "block";
     banner.textContent =
-      "You may be eligible for an iPad lottery in this race!!";
+      "iPad lottery: You may qualify to participate if you win!!";
   } else {
     banner.style.display = "none";
   }
@@ -1099,7 +1094,7 @@ if (horseId === horseChosen) horse.classList.add("chosen");
 
       // NEW: static low-information message in boring condition
       if (!CONDITION.EXCITING) {
-        feed.textContent = "The race is in progress…";
+        feed.textContent = " ";
       }
 
       updateStaminaUI();
@@ -1384,12 +1379,6 @@ if (CONDITION.FOMO) {
       };
 
       try {
-        el("log-output").value = JSON.stringify(payload, null, 2);
-      } catch (e) {
-        el("log-output").value = "Error stringifying log.";
-      }
-
-      try {
         if (typeof window.qualtricsSetData === "function") {
           window.qualtricsSetData("game_log_json", JSON.stringify(payload));
           window.qualtricsSetData("fomo", CONDITION.FOMO ? 1 : 0);
@@ -1420,6 +1409,7 @@ if (CONDITION.FOMO) {
   </script>
 </body>
 </html>
+
 
 
 
